@@ -1,0 +1,19 @@
+{
+  "name": "primo",
+  "version": "1.0.0",
+  "description": "Primo - Front-end Starter Pack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codrox/primo.git"
+  },
+  "author": "discipline",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codrox/primo/issues"
+  },
+  "homepage": "https://github.com/codrox/primo#readme"
+}
