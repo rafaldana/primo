@@ -1,0 +1,19 @@
+$global-width: rem-calc(1400);
+$colors: (
+  primary: #4b4f5d,
+  secondary: #edbe16,
+  success: #3adb76,
+  warning: #ffae00,
+  alert: #cc4b37,
+  border: #b8b8b8,
+  white: #ffffff,
+  gray: #f3f3f3
+);
+
+$breakpoints: (
+  small: 0,
+  medium: 640px,
+  large: 1024px,
+  xlarge: 1400px,
+  xxlarge: 1600px,
+);
