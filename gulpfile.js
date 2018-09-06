@@ -16,6 +16,7 @@ var gulp =          require('gulp'),
     del =           require('del'),
     browser =       require('browser-sync').create(),
     panini =        require('panini'),
+    cached =        require('gulp-cached'),
     imagemin =      require('gulp-imagemin');
 
 //CLEAN
@@ -26,10 +27,11 @@ function clean() {
 //COPY
 function copy() {
     return gulp.src(['src/assets/**/*', '!src/assets/{img,js,scss}/**/*'])
+        .pipe(cached('assets'))
         .pipe(gulp.dest('dist/assets'));
 }
 
-//SASS//
+//SASS
 function styles() {
     return gulp.src('src/assets/scss/app.scss')
         .pipe(sass().on('error', sass.logError))
@@ -40,7 +42,7 @@ function styles() {
         .pipe(browser.reload({ stream: true }));
 }
 
-//SCRIPTS//
+//SCRIPTS
 function scripts() {
     return gulp.src('src/assets/js/**/*.js')
         .pipe(concat('app.js'))
