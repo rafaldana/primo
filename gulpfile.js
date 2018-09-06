@@ -1,11 +1,7 @@
 /*
 TO DO:
-    - flaga --prod
-    - sourcemap
     - cleancss
     - dla js uglify
-    - kopiowanie assets (!js,scss,img)
-
 */
 
 var gulp =          require('gulp'),
@@ -17,7 +13,13 @@ var gulp =          require('gulp'),
     browser =       require('browser-sync').create(),
     panini =        require('panini'),
     cached =        require('gulp-cached'),
-    imagemin =      require('gulp-imagemin');
+    imagemin =      require('gulp-imagemin'),
+    yargs =         require('yargs'),
+    sourcemaps =    require('gulp-sourcemaps'),
+    $if =           require('gulp-if');
+
+
+var PRODUCTION = !!(yargs.argv.production);
 
 //CLEAN
 function clean() {
@@ -34,10 +36,12 @@ function copy() {
 //SASS
 function styles() {
     return gulp.src('src/assets/scss/app.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
+        .pipe($if(!PRODUCTION, sourcemaps.write()))
         .pipe(gulp.dest('dist/assets/css'))
         .pipe(browser.reload({ stream: true }));
 }
