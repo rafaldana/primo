@@ -92,8 +92,8 @@ function watch() {
     gulp.watch(['src/assets/**/*', '!src/assets/{img,js,scss}/**/*'], copy);
     gulp.watch('src/pages/**/*.html').on('all', gulp.series(pages, browser.reload));
     gulp.watch('src/{layouts,partials}/**/*.html').on('all', gulp.series(resetPages, pages, browser.reload));
-    gulp.watch('src/scss/**/*.scss').on('all', styles);
-    gulp.watch('src/js/**/*.js').on('all', gulp.series(scripts, browser.reload));
+    gulp.watch('src/assets/scss/**/*.scss').on('all', styles);
+    gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(scripts, browser.reload));
     gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
 }
 
