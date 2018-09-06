@@ -1,11 +1,13 @@
 @charset 'utf-8';
 
-//SETTINGS
-@import 'settings';
-
 //UTIL
+@import 'util/normalize';
 @import 'util/functions';
 @import 'util/mixins';
+@import 'util/breakpoint';
+
+//SETTINGS
+@import 'settings';
 
 //TYPO
 @import 'typo/base';
