@@ -84,11 +84,6 @@ function serve(done) {
     done();
 }
 
-function reload(done) {
-    browser.reload();
-    done();
-}
-
 //WATCH
 function watch() {
     gulp.watch(['src/assets/**/*', '!src/assets/{img,js,scss}/**/*'], copy);
