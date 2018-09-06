@@ -4,8 +4,21 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background-color: get-color(secondary);
+}
+
+html {
+  font-size: 100%;
+}
+
 body {
   position: relative;
+  background: $body-color;
+  font-family: $body-font;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $body-font-color;
 }
 
 strong {
@@ -33,6 +46,11 @@ h5,
 h6 {
   font-family: inherit;
   line-height: 1.6;
+}
+
+blockquote, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, li, ol, p, pre, td, th, ul {
+  margin: 0;
+  padding: 0;
 }
 
 h1 {}
