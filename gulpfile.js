@@ -1,13 +1,6 @@
-/*
-TO DO:
-    - cleancss
-    - dla js uglify
-*/
-
 var gulp =          require('gulp'),
     sass =          require('gulp-sass'),
     concat =        require('gulp-concat'),
-    uglify =        require('gulp-uglify'),
     autoprefixer =  require('gulp-autoprefixer'),
     del =           require('del'),
     browser =       require('browser-sync').create(),
@@ -16,7 +9,9 @@ var gulp =          require('gulp'),
     imagemin =      require('gulp-imagemin'),
     yargs =         require('yargs'),
     sourcemaps =    require('gulp-sourcemaps'),
-    $if =           require('gulp-if');
+    $if =           require('gulp-if'),
+    cleanCss =      require('gulp-clean-css'),
+    uglify =        require('gulp-uglify');
 
 
 var PRODUCTION = !!(yargs.argv.production);
@@ -42,6 +37,7 @@ function styles() {
             browsers: ['last 2 versions']
         }))
         .pipe($if(!PRODUCTION, sourcemaps.write()))
+        .pipe($if(PRODUCTION, cleanCss({ compatibility: 'ie9' })))
         .pipe(gulp.dest('dist/assets/css'))
         .pipe(browser.reload({ stream: true }));
 }
@@ -49,8 +45,12 @@ function styles() {
 //SCRIPTS
 function scripts() {
     return gulp.src('src/assets/js/**/*.js')
+        .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
-        .pipe(uglify())
+        .pipe($if(PRODUCTION, uglify()
+            .on('error', function(e){ console.log(e); })
+        ))
+        .pipe($if(!PRODUCTION, sourcemaps.write()))
         .pipe(gulp.dest('dist/assets/js'));
 }
 
