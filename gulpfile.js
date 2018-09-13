@@ -11,7 +11,8 @@ var gulp =          require('gulp'),
     sourcemaps =    require('gulp-sourcemaps'),
     $if =           require('gulp-if'),
     cleanCss =      require('gulp-clean-css'),
-    uglify =        require('gulp-uglify');
+    uglify =        require('gulp-uglify'),
+    babel =         require('gulp-babel');
 
 
 var PRODUCTION = !!(yargs.argv.production);
@@ -44,9 +45,9 @@ function styles() {
 
 //SCRIPTS
 function scripts() {
-    return gulp.src('src/assets/js/**/*.js')
+    return gulp.src(['node_modules/babel-polyfill/dist/polyfill.js', 'src/assets/js/**/*.js'])
         .pipe(sourcemaps.init())
-        .pipe(concat('app.js'))
+        .pipe(babel({presets: ['@babel/env']}))
         .pipe($if(PRODUCTION, uglify()
             .on('error', function(e){ console.log(e); })
         ))
